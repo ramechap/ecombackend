@@ -8,7 +8,7 @@ require('dotenv').config();
 const port=process.env.PORT
 require("./mongoconnect")
 const corsOptions = {
-  origin: 'https://ecommerce-food-nm6w.onrender.com', // Your frontend URL
+  origin: 'http://localhost:3000', // Your frontend URL
   credentials: true, // Allow cookies or credentials
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
@@ -18,11 +18,11 @@ app.use(cors(corsOptions));  // Apply CORS middleware
 app.use(express.json()); // ✅ Required for parsing JSON bodies
 app.use(express.urlencoded({ extended: true })); // Optional, for form data
 app.use(cookieParser());
-app.use(cors({ origin: 'https://ecommerce-food-nm6w.onrender.com', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 app.use(cookieParser())
 app.use((_req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://ecommerce-food-nm6w.onrender.com/');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
       res.header('Access-Control-Allow-Credentials', true);
       res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

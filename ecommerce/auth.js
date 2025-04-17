@@ -13,7 +13,7 @@ const router = express.Router();
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); // Optional, for form data
 app.use(cookieParser());
-app.use(cors({ origin: 'https://ecommerce-food-nm6w.onrender.com', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 
 
@@ -33,7 +33,7 @@ router.use(function(req, res, next) {
 
   
   app.use(cookieParser());
-router.use(cors({ credentials: true, origin: 'https://ecommerce-food-nm6w.onrender.com' }));
+router.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 
 router.use(cookieParser());

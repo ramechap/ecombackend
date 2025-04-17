@@ -25,15 +25,15 @@ router.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
     next();
 });
-router.use(cors({ credentials: true, origin: 'https://ecommerce-food-nm6w.onrender.com' }));
-app.use(cors({ credentials: true, origin: 'https://ecommerce-food-nm6w.onrender.com' }));
+router.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(express.json())
 app.use(bodyParser.json())
 router.use(cookieParser())
 router.use(cors());
 app.use(cors());
 const corsOptions = {
-    origin: 'https://ecommerce-food-nm6w.onrender.com', // Your frontend URL
+    origin: 'http://localhost:3000', // Your frontend URL
     credentials: true, // Allow cookies or credentials
     methods: 'GET,POST,PUT,DELETE,OPTIONS',
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
