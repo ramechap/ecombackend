@@ -265,59 +265,59 @@ router.put("/deletefromcart/:id", Authm,async (req, res) => {
 })
 
 
-function payWithEsewa() {
-    if (Object.keys(store.cart).length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
+// function payWithEsewa() {
+//     if (Object.keys(store.cart).length === 0) {
+//         alert("Your cart is empty!");
+//         return;
+//     }
 
-    const totalAmount = store.getCartTotal();
+//     const totalAmount = store.getCartTotal();
 
-    const currentTime = new Date();
-    const formattedTime = currentTime.toISOString().slice(2, 10).replace(/-/g, '') +
-                         '-' + currentTime.getHours() + currentTime.getMinutes() + currentTime.getSeconds();
-    const transactionUuid = formattedTime;
+//     const currentTime = new Date();
+//     const formattedTime = currentTime.toISOString().slice(2, 10).replace(/-/g, '') +
+//                          '-' + currentTime.getHours() + currentTime.getMinutes() + currentTime.getSeconds();
+//     const transactionUuid = formattedTime;
 
-    const amount = totalAmount;
-    const taxAmount = 0;
-    const productServiceCharge = 0;
-    const productDeliveryCharge = 0;
-    const totalAmountWithCharges = amount + taxAmount + productServiceCharge + productDeliveryCharge;
-    const productCode = 'EPAYTEST';
+//     const amount = totalAmount;
+//     const taxAmount = 0;
+//     const productServiceCharge = 0;
+//     const productDeliveryCharge = 0;
+//     const totalAmountWithCharges = amount + taxAmount + productServiceCharge + productDeliveryCharge;
+//     const productCode = 'EPAYTEST';
 
-    const signatureString = `total_amount=${totalAmountWithCharges},transaction_uuid=${transactionUuid},product_code=${productCode}`;
-    const hash = CryptoJS.HmacSHA256(signatureString, secretKey);
-    const signature = CryptoJS.enc.Base64.stringify(hash);
+//     const signatureString = `total_amount=${totalAmountWithCharges},transaction_uuid=${transactionUuid},product_code=${productCode}`;
+//     const hash = CryptoJS.HmacSHA256(signatureString, secretKey);
+//     const signature = CryptoJS.enc.Base64.stringify(hash);
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://rc-epay.esewa.com.np/api/epay/main/v2/form';
+//     const form = document.createElement('form');
+//     form.method = 'POST';
+//     form.action = 'https://rc-epay.esewa.com.np/api/epay/main/v2/form';
 
-    const paymentData = {
-        'amount': amount,
-        'tax_amount': taxAmount,
-        'total_amount': totalAmountWithCharges,
-        'transaction_uuid': transactionUuid,
-        'product_code': productCode,
-        'product_service_charge': productServiceCharge,
-        'product_delivery_charge': productDeliveryCharge,
-        'success_url': 'https://esewa.com.np',
-        'failure_url': 'https://google.com',
-        'signed_field_names': 'total_amount,transaction_uuid,product_code',
-        'signature': signature
-    };
+//     const paymentData = {
+//         'amount': amount,
+//         'tax_amount': taxAmount,
+//         'total_amount': totalAmountWithCharges,
+//         'transaction_uuid': transactionUuid,
+//         'product_code': productCode,
+//         'product_service_charge': productServiceCharge,
+//         'product_delivery_charge': productDeliveryCharge,
+//         'success_url': 'https://esewa.com.np',
+//         'failure_url': 'https://google.com',
+//         'signed_field_names': 'total_amount,transaction_uuid,product_code',
+//         'signature': signature
+//     };
 
-    for (const [key, value] of Object.entries(paymentData)) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        form.appendChild(input);
-    }
+//     for (const [key, value] of Object.entries(paymentData)) {
+//         const input = document.createElement('input');
+//         input.type = 'hidden';
+//         input.name = key;
+//         input.value = value;
+//         form.appendChild(input);
+//     }
 
-    document.body.appendChild(form);
-    form.submit();
-}
-app.get('/generate-payment', generatePaymentData);
+//     document.body.appendChild(form);
+//     form.submit();
+// }
+// app.get('/generate-payment', generatePaymentData);
 
 module.exports = router
